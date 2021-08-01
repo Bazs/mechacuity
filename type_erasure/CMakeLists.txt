@@ -1,0 +1,1 @@
+add_library(type_erasure type_erasure.cpp)
