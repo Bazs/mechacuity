@@ -1,3 +1,4 @@
+#include <any>
 #include <functional>
 #include <string>
 
@@ -5,15 +6,14 @@ namespace erasure {
 
 class IPublishSubscribe {
 public:
-  template <typename T>
-  virtual void publish(T &&data, const std::string &channel_name) = 0;
+  virtual void publish(const std::any &data,
+                       const std::string &channel_name) = 0;
 
-  template <typename T>
-  using Callback =
-      std::function<void(const T &data, const std::string &channel_name)>;
+  using Callback = std::function<void(const std::any &data,
+                                      const std::string &channel_name)>;
 
-  template <typename T>
-  void subscribe(const std::string &channel_name, const Callback<T> &callback);
+  virtual void subscribe(const std::any &channel_name,
+                         const Callback &callback) = 0;
 };
 
 } // namespace erasure
