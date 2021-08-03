@@ -1,1 +1,5 @@
-add_library(type_erasure type_erasure.cpp)
+add_library(basic_publish_subscribe basic_publish_subscribe.cpp)
+add_library(client client.cpp)
+
+add_executable(type_erasure type_erasure.cpp)
+target_link_libraries(type_erasure basic_publish_subscribe client)

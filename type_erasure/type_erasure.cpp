@@ -1,19 +1,8 @@
-#include <any>
-#include <functional>
-#include <string>
+#include "basic_publish_subscribe.hpp"
+#include "client.hpp"
 
-namespace erasure {
-
-class IPublishSubscribe {
-public:
-  virtual void publish(const std::any &data,
-                       const std::string &channel_name) = 0;
-
-  using Callback = std::function<void(const std::any &data,
-                                      const std::string &channel_name)>;
-
-  virtual void subscribe(const std::any &channel_name,
-                         const Callback &callback) = 0;
-};
-
-} // namespace erasure
+int main() {
+  auto pub_sub_interface = std::make_shared<pubsub::BasicPublishSubscribe>();
+  application::PubSubClient client(pub_sub_interface);
+  client.doWork();
+}
